@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>DB management console</title>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" crossorigin="anonymous">
+<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <form>
+      <fieldset class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="userName" placeholder="name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="bday">Bday</label>
+        <input type="text" class="form-control" id="userBday" placeholder="bday">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="bday">Age</label>
+        <input type="text" class="form-control" id="userAge" placeholder="age">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="state">State</label>
+        <input type="text" class="form-control" id="userState" placeholder="state">
+      </fieldset>
+      <span class="btn btn-primary" onclick="search()">Search</span>
+    </form>
+     <table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Bday</th>
+          <th>Age</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th scope="row"></th>
+          <td>{{ user.name}}</td>
+          <td>{{ user.bday }}</td>
+          <td>{{ user.age }}</td>
+          <td>{{ user.state }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+  <script>
+      function search(){
+          var params = jQuery.param({
+            name: $('#userName').val(),
+            bday: $('#userBday').val(),
+            age: $('#userAge').val(),
+            state:  $('#userState').val()
+          });
+
+          location.href = "/?" + params;
+      }
+  </script>
+</html>
