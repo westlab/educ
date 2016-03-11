@@ -16,12 +16,12 @@ def convert_values(data):
     """
     return '("{}", "{}", {}, "{}")'.format(*data)
 
-data = []
-with open('./data.csv') as f:
-    for line in f:
-        data.append(line.strip().split(','))
+def get_data():
+    with open('./data.csv') as f:
+        for line in f:
+            yield line.strip().split(',')
 
-sql = INSERT_TMP.format(",\n".join(convert_values(d) for d in data))
+sql = INSERT_TMP.format(",\n".join(convert_values(d) for d in get_data()))
 
 """
 example of output
